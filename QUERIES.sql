@@ -26,7 +26,7 @@ SELECT G.Name AS GuestName, SE.Name AS SharedExperience
 FROM SEGuests SEG
 JOIN SE ON SEG.SEId = SE.SEId
 JOIN Guests G ON SEG.GId = G.GId
-WHERE SE.Name = 'Parallel Universe Trip';
+WHERE SE.Name = 'Flat Earth Cruise';
 
 
 -- 7. Min, average, and max for experience
