@@ -1,21 +1,21 @@
 # ---------------------------------------------
 # STAGE 1: Build and Publish
 # ---------------------------------------------
-    FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+    FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
     WORKDIR /app
     
     # Copy the full solution and restore only the Assignment1 project
     COPY . ./
-    RUN dotnet restore "./assignment1.csproj"
+    RUN dotnet restore "./WebAPI.csproj"
     
     # Build and publish to a folder called "out"
-    RUN dotnet publish "./assignment1.csproj" -c Release -o /app/out
+    RUN dotnet publish "./WebAPI.csproj" -c Release -o /app/out
     
     
 # ---------------------------------------------
 # STAGE 2: Runtime
 # ---------------------------------------------
-    FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+    FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
     WORKDIR /app
     
     # Copy the compiled output from the build stage
@@ -26,5 +26,5 @@
     EXPOSE 80
     
     # Run the application
-    ENTRYPOINT ["dotnet", "assignment1.dll"]
+    ENTRYPOINT ["dotnet", "WebAPI.dll"]
     
