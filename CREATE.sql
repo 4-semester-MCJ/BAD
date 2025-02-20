@@ -32,7 +32,7 @@ CREATE TABLE SE (
     Date DATETIME NOT NULL,
 );
 
--- Table linking Shared Experiences with Experiences
+-- Junction table linking Shared Experiences with Experiences 
 CREATE TABLE SEDets (
     SEId INT NOT NULL,
     EId INT NOT NULL,

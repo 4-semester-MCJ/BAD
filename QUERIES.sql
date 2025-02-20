@@ -1,10 +1,10 @@
 USE experienceSharedDb;
 
 -- 1. Get the data collected for each experience provider.
-SELECT Name, BPA, PhoneNum, CVR FROM Providers;
+SELECT BPA, PhoneNum, CVR FROM Providers;
 
 -- 2. List experiences
-SELECT Name, Description, Price FROM Experiences;
+SELECT Name, Price FROM Experiences;
 
 -- 3. Shared experiences
 SELECT Name, Date FROM SE ORDER BY Date DESC;
@@ -16,13 +16,15 @@ JOIN Guests G ON SEG.GId = G.GId
 ORDER BY SEG.SEId;
 
 -- 5. Get experiences in shared experience
-SELECT SE.Name AS SharedExperience, E.Name AS Experience 
+SELECT E.Name AS Experience 
 FROM SEDets SED
 JOIN SE ON SED.SEId = SE.SEId
-JOIN Experiences E ON SED.EId = E.EId;
+JOIN Experiences E ON SED.EId = E.EId
+WHERE SE.Name = 'Flat Earth Cruise';
+
 
 -- 6. Guests registered for one experience in a shared experience
-SELECT G.Name AS GuestName, SE.Name AS SharedExperience
+SELECT G.Name AS GuestName
 FROM SEGuests SEG
 JOIN SE ON SEG.SEId = SE.SEId
 JOIN Guests G ON SEG.GId = G.GId

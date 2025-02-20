@@ -3,8 +3,8 @@ using experiencesAPI;
 
 namespace WebAPI.Controllers;
 
+    [Route("exp")] 
     [ApiController]
-    [Route("exp")] // api/experiences
     public class ExperiencesController : ControllerBase 
     {
         // GET endpoint
