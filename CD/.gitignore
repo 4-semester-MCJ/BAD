@@ -1,0 +1,56 @@
+# Build artifacts
+bin/
+obj/
+
+# Ignore all contents inside obj/
+obj/**
+
+# Entity Framework Migrations
+Migrations/
+
+# User-specific files
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet packages
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.assets.json
+PackageReferences/
+
+# Ignore NuGet-generated files
+*.nuget.dgspec.json
+*.nuget.g.props
+*.nuget.g.targets
+project.assets.json
+project.nuget.cache
+
+# Rider and JetBrains files
+.idea/
+*.sln.iml
+
+# Visual Studio Code settings
+.vscode/
+*.code-workspace
+
+# Logs
+logs/
+*.log
+
+# .NET-generated files
+*.vs/
+*.db
+*.db-shm
+*.db-wal
+
+# Temporary files
+*.tmp
+*.temp
+
+# Cache files
+*.cache
