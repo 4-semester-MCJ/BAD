@@ -22,8 +22,8 @@
     COPY --from=build /app/out ./
     
     # Expose port 80 and set ASP.NET Core to listen on it
-    ENV ASPNETCORE_URLS=http://+:80
-    EXPOSE 80
+    ENV ASPNETCORE_URLS=http://+:8080
+    EXPOSE 8080
     
     # Run the application
     ENTRYPOINT ["dotnet", "WebAPI.dll"]
