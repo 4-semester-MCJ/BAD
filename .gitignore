@@ -1,0 +1,39 @@
+# Build and publish outputs
+bin/
+obj/
+
+# User-specific files
+.vscode/
+*.user
+*.suo
+*.csproj.user
+
+# Logs and debug
+logs/
+*.log
+
+# Environment files
+.env
+secrets.json
+
+# Entity Framework Migrations
+Migrations/
+
+# SQLite database
+app.db
+app.db-shm
+app.db-wal
+
+# ASP.NET Core configurations
+appsettings.Development.json
+
+# Rider and JetBrains IDE settings
+.idea/
+*.iml
+
+# Windows specific
+Thumbs.db
+Desktop.ini
+
+# MacOS specific
+.DS_Store
