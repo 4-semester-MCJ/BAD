@@ -17,7 +17,7 @@ public class QueriesController : ControllerBase
     public async Task<IActionResult> GetProviderDetails()
     {
         var result = await _context.Providers
-            .Select(p => new { p.BPA, p.PhoneNum, p.CVR })
+            .Select(p => new { p.BuisnessPhysicalAddress, p.PhoneNumber, p.CVR })
             .ToListAsync();
         return Ok(result);
     }
@@ -49,8 +49,8 @@ public class QueriesController : ControllerBase
     {
         var result = await _context.SharedExperienceGuests
             .Include(seg => seg.Guest)
-            .OrderBy(seg => seg.SEId)
-            .Select(seg => new { seg.SEId, GuestName = seg.Guest.Name })
+            .OrderBy(seg => seg.SharedExperienceId)
+            .Select(seg => new { seg.SharedExperienceId, GuestName = seg.Guest.Name })
             .ToListAsync();
         return Ok(result);
     }
@@ -100,12 +100,12 @@ public class QueriesController : ControllerBase
             {
                 Experience = e.Name,
                 NumberOfGuests = _context.SharedExperienceDetails
-                    .Where(d => d.EId == e.EId)
-                    .SelectMany(d => _context.SharedExperienceGuests.Where(g => g.SEId == d.SEId))
+                    .Where(d => d.ExperienceId == e.ExperienceId)
+                    .SelectMany(d => _context.SharedExperienceGuests.Where(g => g.SharedExperienceId == d.SharedExperienceId))
                     .Count(),
                 TotalSales = e.Price * _context.SharedExperienceDetails
-                    .Where(d => d.EId == e.EId)
-                    .SelectMany(d => _context.SharedExperienceGuests.Where(g => g.SEId == d.SEId))
+                    .Where(d => d.ExperienceId == e.ExperienceId)
+                    .SelectMany(d => _context.SharedExperienceGuests.Where(g => g.SharedExperienceId == d.SharedExperienceId))
                     .Count()
             }).ToListAsync();
         return Ok(result);
@@ -119,7 +119,7 @@ public class QueriesController : ControllerBase
             .Select(se => new
             {
                 se.Name,
-                GuestCount = _context.SharedExperienceGuests.Count(g => g.SEId == se.SEId)
+                GuestCount = _context.SharedExperienceGuests.Count(g => g.SharedExperienceId == se.SharedExperienceId)
             })
             .Where(x => x.GuestCount > 1)
             .ToListAsync();

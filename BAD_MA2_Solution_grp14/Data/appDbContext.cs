@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 public class AppDbContext : DbContext
 {
@@ -13,32 +14,32 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Composite key for SEDets
+        // Composite key for SharedExperienceDetails
         modelBuilder.Entity<SharedExperienceDetail>()
-            .HasKey(sed => new { sed.SEId, sed.EId });
+            .HasKey(sed => new { sed.SharedExperienceId, sed.ExperienceId });
 
         modelBuilder.Entity<SharedExperienceDetail>()
             .HasOne(sed => sed.SharedExperience)
             .WithMany(se => se.SharedExperienceDetails)
-            .HasForeignKey(sed => sed.SEId);
+            .HasForeignKey(sed => sed.SharedExperienceId);
 
         modelBuilder.Entity<SharedExperienceDetail>()
             .HasOne(sed => sed.Experience)
             .WithMany(e => e.SharedExperienceDetails)
-            .HasForeignKey(sed => sed.EId);
+            .HasForeignKey(sed => sed.ExperienceId);
 
-        // Composite key for SEGuests
+        // Composite key for SharedExperienceGuests
         modelBuilder.Entity<SharedExperienceGuest>()
-            .HasKey(seg => new { seg.SEId, seg.GId });
+            .HasKey(seg => new { seg.SharedExperienceId, seg.GuestId });
 
         modelBuilder.Entity<SharedExperienceGuest>()
             .HasOne(seg => seg.SharedExperience)
             .WithMany(se => se.SharedExperienceGuests)
-            .HasForeignKey(seg => seg.SEId);
+            .HasForeignKey(seg => seg.SharedExperienceId);
 
         modelBuilder.Entity<SharedExperienceGuest>()
             .HasOne(seg => seg.Guest)
             .WithMany(g => g.SharedExperienceGuests)
-            .HasForeignKey(seg => seg.GId);
+            .HasForeignKey(seg => seg.GuestId);
     }
 }

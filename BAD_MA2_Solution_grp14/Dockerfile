@@ -6,10 +6,10 @@
     
     # Copy the full solution and restore only the Assignment1 project
     COPY . ./
-    RUN dotnet restore "./WebAPI.csproj"
+    RUN dotnet restore "./BAD_MA2_Solution_grp14.csproj"
     
     # Build and publish to a folder called "out"
-    RUN dotnet publish "./WebAPI.csproj" -c Release -o /app/out
+    RUN dotnet publish "./BAD_MA2_Solution_grp14.csproj" -c Release -o /app/out
     
     
 # ---------------------------------------------
@@ -24,7 +24,8 @@
     # Expose port 80 and set ASP.NET Core to listen on it
     ENV ASPNETCORE_URLS=http://+:8080
     EXPOSE 8080
+    EXPOSE 443
     
     # Run the application
-    ENTRYPOINT ["dotnet", "WebAPI.dll"]
+    ENTRYPOINT ["dotnet", "BAD_MA2_Solution_grp14.dll"]
     

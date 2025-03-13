@@ -27,7 +27,7 @@ public class SharedExperiencesController : ControllerBase
         var se = await _context.SharedExperiences
             .Include(x => x.SharedExperienceDetails)
             .Include(x => x.SharedExperienceGuests)
-            .FirstOrDefaultAsync(x => x.SEId == id);
+            .FirstOrDefaultAsync(x => x.SharedExperienceId == id);
 
         if (se == null) return NotFound();
         return se;

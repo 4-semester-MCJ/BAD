@@ -1,4 +1,3 @@
-// SeedData.cs
 using System;
 using System.Linq;
 
@@ -10,17 +9,17 @@ public static class SeedData
 
         var providers = new[]
         {
-            new Provider { Name = "Area 51 B&B", BPA = "51 Classified Rd, Nowhereland", PhoneNum = "555-UFOZ", CVR = "DKALIEN666" },
-            new Provider { Name = "The Time Travelers Agency", BPA = "1.21 Gigawatt St, Past & Future", PhoneNum = "555-WE-WERE", CVR = "DK88888888" }
+            new Provider { Name = "Area 51 B&B", BuisnessPhysicalAddress = "51 Classified Rd, Nowhereland", PhoneNumber = "555-UFOZ", CVR = "DKALIEN666" },
+            new Provider { Name = "The Time Travelers Agency", BuisnessPhysicalAddress = "1.21 Gigawatt St, Past & Future", PhoneNumber = "555-WE-WERE", CVR = "DK88888888" }
         };
         context.Providers.AddRange(providers);
 
         var guests = new[]
         {
-            new Guest { Name = "Florida Man", Age = 37, PhoneNum = "555-GATOR" },
-            new Guest { Name = "Elon Dust", Age = 52, PhoneNum = "555-SPACEX" },
-            new Guest { Name = "Captain Obvious", Age = 69, PhoneNum = "555-OBVIOUS" },
-            new Guest { Name = "The Loch Ness Monster", Age = 1500, PhoneNum = "555-NEVERSEEN" }
+            new Guest { Name = "Florida Man", Age = 37, PhoneNumber = "555-GATOR" },
+            new Guest { Name = "Elon Dust", Age = 52, PhoneNumber = "555-SPACEX" },
+            new Guest { Name = "Captain Obvious", Age = 69, PhoneNumber = "555-OBVIOUS" },
+            new Guest { Name = "The Loch Ness Monster", Age = 1500, PhoneNumber = "555-NEVERSEEN" }
         };
         context.Guests.AddRange(guests);
 
@@ -28,10 +27,10 @@ public static class SeedData
 
         var experiences = new[]
         {
-            new Experience { Name = "Sleepover at Area 51", Description = "Spend a night in the desert. If you disappear, we are nowhere near", ProvId = providers[0].ProvId, Price = 300.00m },
-            new Experience { Name = "Time Travel Weekend", Description = "Go back to last Friday to fix your mistakes.", ProvId = providers[1].ProvId, Price = 5000.00m },
-            new Experience { Name = "Ghost Hunting Bootcamp", Description = "Learn to communicate with the beyond. Refunds are ghostly figures only.", ProvId = providers[0].ProvId, Price = 150.00m },
-            new Experience { Name = "Jetpack Racing", Description = "Strap in and take off. Legal waivers required.", ProvId = providers[1].ProvId, Price = 999.99m }
+            new Experience { Name = "Sleepover at Area 51", Description = "Spend a night in the desert. If you disappear, we are nowhere near", ProviderId = providers[0].ProviderId, Price = 300.00m },
+            new Experience { Name = "Time Travel Weekend", Description = "Go back to last Friday to fix your mistakes.", ProviderId = providers[1].ProviderId, Price = 5000.00m },
+            new Experience { Name = "Ghost Hunting Bootcamp", Description = "Learn to communicate with the beyond. Refunds are ghostly figures only.", ProviderId = providers[0].ProviderId, Price = 150.00m },
+            new Experience { Name = "Jetpack Racing", Description = "Strap in and take off. Legal waivers required.", ProviderId = providers[1].ProviderId, Price = 999.99m }
         };
         context.Experiences.AddRange(experiences);
         context.SaveChanges();
@@ -46,19 +45,19 @@ public static class SeedData
 
         var sedets = new[]
         {
-            new SharedExperienceDetail { SEId = sharedExperiences[0].SEId, EId = experiences[0].EId },
-            new SharedExperienceDetail { SEId = sharedExperiences[0].SEId, EId = experiences[1].EId },
-            new SharedExperienceDetail { SEId = sharedExperiences[1].SEId, EId = experiences[2].EId },
-            new SharedExperienceDetail { SEId = sharedExperiences[1].SEId, EId = experiences[3].EId }
+            new SharedExperienceDetail { SharedExperienceId = sharedExperiences[0].SharedExperienceId, ExperienceId = experiences[0].ExperienceId },
+            new SharedExperienceDetail { SharedExperienceId = sharedExperiences[0].SharedExperienceId, ExperienceId = experiences[1].ExperienceId },
+            new SharedExperienceDetail { SharedExperienceId = sharedExperiences[1].SharedExperienceId, ExperienceId = experiences[2].ExperienceId },
+            new SharedExperienceDetail { SharedExperienceId = sharedExperiences[1].SharedExperienceId, ExperienceId = experiences[3].ExperienceId }
         };
         context.SharedExperienceDetails.AddRange(sedets);
 
         var seguests = new[]
         {
-            new SharedExperienceGuest { SEId = sharedExperiences[0].SEId, GId = guests[0].GId },
-            new SharedExperienceGuest { SEId = sharedExperiences[0].SEId, GId = guests[1].GId },
-            new SharedExperienceGuest { SEId = sharedExperiences[1].SEId, GId = guests[2].GId },
-            new SharedExperienceGuest { SEId = sharedExperiences[1].SEId, GId = guests[3].GId }
+            new SharedExperienceGuest { SharedExperienceId = sharedExperiences[0].SharedExperienceId, GuestId = guests[0].GuestId },
+            new SharedExperienceGuest { SharedExperienceId = sharedExperiences[0].SharedExperienceId, GuestId = guests[1].GuestId },
+            new SharedExperienceGuest { SharedExperienceId = sharedExperiences[1].SharedExperienceId, GuestId = guests[2].GuestId },
+            new SharedExperienceGuest { SharedExperienceId = sharedExperiences[1].SharedExperienceId, GuestId = guests[3].GuestId }
         };
         context.SharedExperienceGuests.AddRange(seguests);
 

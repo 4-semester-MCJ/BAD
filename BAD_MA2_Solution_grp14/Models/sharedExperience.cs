@@ -1,6 +1,6 @@
 public class SharedExperience
 {
-    public int SEId { get; set; }
+    public int SharedExperienceId { get; set; }
     public string? Name { get; set; }
     public DateTime Date { get; set; }
 
