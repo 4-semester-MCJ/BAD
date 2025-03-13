@@ -1,35 +1,25 @@
-using Microsoft.AspNetCore.Mvc;
-using experiencesAPI;
-
-namespace WebAPI.Controllers;
-
-[Route("exp")]
+[Route("api/[controller]")]
 [ApiController]
 public class ExperiencesController : ControllerBase
 {
-    // GET endpoint
-    [HttpGet]
-    public ActionResult<IEnumerable<Experience>> Get()
+    private readonly AppDbContext _context;
+
+    public ExperiencesController(AppDbContext context)
     {
-        var experience = new List<Experience>
-            {
-                new Experience {
-                    Name = "Local Watering Hole",
-                    Description = "Includes a trip to KK",
-                    Price = 500 },
+        _context = context;
+    }
 
-                new Experience {
-                    Name = "Skydiving",
-                    Description = "Fall out from a plane",
-                    Price = 2500 },
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Experience>>> GetExperiences()
+    {
+        return await _context.Experiences.ToListAsync();
+    }
 
-                new Experience {
-                    Name = "Authentic Coffee Farm",
-                    Description = "A little animal eats the best beans and then you go find the best beans",
-                    Price = 300 }
-
-            };
-        return Ok(experience);
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Experience>> GetExperience(int id)
+    {
+        var experience = await _context.Experiences.FindAsync(id);
+        if (experience == null) return NotFound();
+        return experience;
     }
 }
-
