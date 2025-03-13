@@ -1,17 +1,11 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
-
-namespace experiencesAPI
+public class Experience
 {
-    // POCO class 
-    public class Experience
-    {
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-        public int? Price { get; set; } // ? means that the value can be null
-    }
+    public int EId { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public int ProvId { get; set; }
+    public decimal Price { get; set; }
+
+    public Provider Provider { get; set; }
+    public ICollection<SharedExperienceDetail> SharedExperienceDetails { get; set; }
 }
