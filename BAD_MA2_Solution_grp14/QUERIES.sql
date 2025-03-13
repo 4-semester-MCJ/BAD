@@ -7,7 +7,7 @@ SELECT BPA, PhoneNum, CVR FROM Providers;
 SELECT Name, Price FROM Experiences;
 
 -- 3. Shared experiences
-SELECT Name, Date FROM SE ORDER BY Date DESC;
+SELECT Name, Date FROM SE ORDER BY Date ASC;
 
 -- 4. Guest for shared experience
 SELECT  G.Name
