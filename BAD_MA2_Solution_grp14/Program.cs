@@ -7,7 +7,7 @@ using experiencesAPI;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.WebHost.UseUrls("http://localhost:8080/swagger");
+builder.WebHost.UseUrls("http://localhost:8080");
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
