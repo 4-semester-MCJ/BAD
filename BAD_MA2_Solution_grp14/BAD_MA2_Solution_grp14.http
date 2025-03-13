@@ -1,0 +1,6 @@
+@BAD_MA2_Solution_grp14_HostAddress = http://localhost:5000
+
+GET {{BAD_MA2_Solution_grp14_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
