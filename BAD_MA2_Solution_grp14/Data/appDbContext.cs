@@ -41,5 +41,9 @@ public class AppDbContext : DbContext
             .HasOne(seg => seg.Guest)
             .WithMany(g => g.SharedExperienceGuests)
             .HasForeignKey(seg => seg.GuestId);
+
+        modelBuilder.Entity<Experience>()
+            .Property(e => e.Price)
+            .HasColumnType("int");
     }
 }
