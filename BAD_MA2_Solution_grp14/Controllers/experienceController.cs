@@ -24,6 +24,7 @@ public class ExperiencesController : ControllerBase
         return await _context.Experiences.ToListAsync();
     }
 
+
     // GET: api/experiences/{id}
     [HttpGet("{id}")]
     public async Task<ActionResult<Experience>> GetExperience(int id)
