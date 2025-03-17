@@ -9,8 +9,8 @@ public static class SeedData
 
         var providers = new[]
         {
-            new Provider { Name = "Area 51 B&B", BuisnessPhysicalAddress = "51 Classified Rd, Nowhereland", PhoneNumber = "555-UFOZ", CVR = "DKALIEN666" },
-            new Provider { Name = "The Time Travelers Agency", BuisnessPhysicalAddress = "1.21 Gigawatt St, Past & Future", PhoneNumber = "555-WE-WERE", CVR = "DK88888888" }
+            new Provider { Name = "Area 51 B&B", BuisnessPhysicalAddress = "51 Classified Rd, Nowhereland", PhoneNumber = "555-UFOZ", CVR = "DKALIEN666", TouristicOperatorPerimt = "51-666" },
+            new Provider { Name = "The Time Travelers Agency", BuisnessPhysicalAddress = "1.21 Gigawatt St, Past & Future", PhoneNumber = "555-WE-WERE", CVR = "DK88888888", TouristicOperatorPerimt = "TIME-TRAVEL" }
         };
         context.Providers.AddRange(providers);
 

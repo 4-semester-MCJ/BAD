@@ -6,5 +6,7 @@ public class Provider
     public string? PhoneNumber { get; set; }
     public string? CVR { get; set; }
 
+    public string? TouristicOperatorPerimt { get; set; }
+
     public ICollection<Experience> Experiences { get; set; }
 }
