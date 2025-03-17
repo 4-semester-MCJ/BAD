@@ -3,9 +3,11 @@ public class Experience
     public int ExperienceId { get; set; }
     public string? Name { get; set; }
     public string? Description { get; set; }
-    public int ProviderId { get; set; } // foreign key
+    public int ProviderId { get; set; } // foreign key, should remain as it is.
+
+    [NoneNegative] // Custom validation attribute.
     public decimal Price { get; set; }
 
-    public Provider Provider { get; set; }
-    public ICollection<SharedExperienceDetail> SharedExperienceDetails { get; set; }
+    public Provider? Provider { get; set; } // Make this nullable if not always required.
+    public ICollection<SharedExperienceDetail>? SharedExperienceDetails { get; set; } // Make this nullable if not always required.
 }
