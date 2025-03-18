@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BAD_MA2_Solution_grp14.Models.DTOs;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -18,71 +19,85 @@ public class ExperiencesController : ControllerBase
 
     // GET: api/experiences
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Experience>>> GetExperiences()
+    public async Task<ActionResult<IEnumerable<ExperienceDTO>>> GetExperiences()
     {
-        // Return all experiences from the database
-        return await _context.Experiences.ToListAsync();
+        var experiences = await _context.Experiences.ToListAsync();
+        return experiences.Select(e => new ExperienceDTO
+        {
+            ExperienceId = e.ExperienceId,
+            Name = e.Name,
+            Description = e.Description,
+            ProviderId = e.ProviderId,
+            Price = e.Price
+        }).ToList();
     }
-
 
     // GET: api/experiences/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<Experience>> GetExperience(int id)
+    public async Task<ActionResult<ExperienceDTO>> GetExperience(int id)
     {
-        // Find an experience by ID
         var experience = await _context.Experiences.FindAsync(id);
         if (experience == null)
         {
-            return NotFound(); // Return 404 if not found
+            return NotFound();
         }
-        return experience;
+
+        return new ExperienceDTO
+        {
+            ExperienceId = experience.ExperienceId,
+            Name = experience.Name,
+            Description = experience.Description,
+            ProviderId = experience.ProviderId,
+            Price = experience.Price
+        };
     }
 
     // POST: api/experiences
     [HttpPost]
-    public async Task<ActionResult<Experience>> PostExperience([FromBody] Experience experience)
+    public async Task<ActionResult<ExperienceDTO>> PostExperience([FromBody] CreateExperienceDTO createDto)
     {
-        // Validate the price field using the custom validation attribute
-        if (!ModelState.IsValid)
+        var experience = new Experience
         {
-            return BadRequest(ModelState); // Return 400 if invalid
-        }
+            Name = createDto.Name,
+            Description = createDto.Description,
+            ProviderId = createDto.ProviderId,
+            Price = createDto.Price
+        };
 
-        // Add the new experience to the database
         _context.Experiences.Add(experience);
         await _context.SaveChangesAsync();
 
-        // Return 201 Created response with the new experience and its location
-        return CreatedAtAction(nameof(GetExperience), new { id = experience.ExperienceId }, experience);
+        var resultDto = new ExperienceDTO
+        {
+            ExperienceId = experience.ExperienceId,
+            Name = experience.Name,
+            Description = experience.Description,
+            ProviderId = experience.ProviderId,
+            Price = experience.Price
+        };
+
+        return CreatedAtAction(nameof(GetExperience), new { id = resultDto.ExperienceId }, resultDto);
     }
 
     // PUT: api/experiences/{id}
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutExperience(int id, [FromBody] Experience experience)
+    public async Task<IActionResult> PutExperience(int id, [FromBody] UpdateExperienceDTO updateDto)
     {
-        // Check if the experience exists
-        var existingExperience = await _context.Experiences.FindAsync(id);
-        if (existingExperience == null)
+        var experience = await _context.Experiences.FindAsync(id);
+        if (experience == null)
         {
-            return NotFound(); // Return 404 if not found
+            return NotFound();
         }
 
-        // Validate the price field again if needed
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState); // Return 400 if invalid
-        }
+        // Only update properties that are provided in the DTO
+        if (updateDto.Name != null)
+            experience.Name = updateDto.Name;
+        if (updateDto.Description != null)
+            experience.Description = updateDto.Description;
+        if (updateDto.Price.HasValue)
+            experience.Price = updateDto.Price.Value;
 
-        // Update the properties of the existing experience
-        existingExperience.Name = experience.Name;
-        existingExperience.Description = experience.Description;
-        existingExperience.ProviderId = experience.ProviderId;
-        existingExperience.Price = experience.Price;
-
-        // Save the changes to the database
         await _context.SaveChangesAsync();
-
-        // Return 204 No Content as confirmation of successful update
         return NoContent();
     }
 

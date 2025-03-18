@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BAD_MA2_Solution_grp14.Models.DTOs;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -14,43 +15,59 @@ public class QueriesController : ControllerBase
 
     // 1. Get provider data
     [HttpGet("providers-info")]
-    public async Task<IActionResult> GetProviderDetails()
+    public async Task<ActionResult<IEnumerable<ProviderInfoDTO>>> GetProviderDetails()
     {
         var result = await _context.Providers
-            .Select(p => new { p.BuisnessPhysicalAddress, p.PhoneNumber })
+            .Select(p => new ProviderInfoDTO 
+            { 
+                BusinessPhysicalAddress = p.BuisnessPhysicalAddress, 
+                PhoneNumber = p.PhoneNumber 
+            })
             .ToListAsync();
         return Ok(result);
     }
 
     // 2. List experiences with price
     [HttpGet("experiences-list")]
-    public async Task<IActionResult> GetExperiencesList()
+    public async Task<ActionResult<IEnumerable<ExperienceListDTO>>> GetExperiencesList()
     {
         var result = await _context.Experiences
-            .Select(e => new { e.Name, e.Price })
+            .Select(e => new ExperienceListDTO 
+            { 
+                Name = e.Name, 
+                Price = e.Price 
+            })
             .ToListAsync();
         return Ok(result);
     }
 
     // 3. List shared experiences ordered by date
     [HttpGet("shared-experiences")]
-    public async Task<IActionResult> GetSharedExperiences()
+    public async Task<ActionResult<IEnumerable<SharedExperienceListDTO>>> GetSharedExperiences()
     {
         var result = await _context.SharedExperiences
             .OrderBy(se => se.Date)
-            .Select(se => new { se.Name, se.Date })
+            .Select(se => new SharedExperienceListDTO 
+            { 
+                Name = se.Name, 
+                Date = se.Date 
+            })
             .ToListAsync();
         return Ok(result);
     }
 
     // 4. Guests for shared experiences
     [HttpGet("shared-experiences/guests")]
-    public async Task<IActionResult> GetGuestsForSharedExperiences()
+    public async Task<ActionResult<IEnumerable<SharedExperienceGuestListDTO>>> GetGuestsForSharedExperiences()
     {
         var result = await _context.SharedExperienceGuests
             .Include(seg => seg.Guest)
             .OrderBy(seg => seg.SharedExperienceId)
-            .Select(seg => new { seg.SharedExperienceId, GuestName = seg.Guest.Name })
+            .Select(seg => new SharedExperienceGuestListDTO 
+            { 
+                SharedExperienceId = seg.SharedExperienceId, 
+                GuestName = seg.Guest.Name 
+            })
             .ToListAsync();
         return Ok(result);
     }
