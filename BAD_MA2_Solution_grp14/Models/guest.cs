@@ -5,5 +5,5 @@ public class Guest
     public int Age { get; set; }
     public string? PhoneNumber { get; set; }
 
-    public ICollection<SharedExperienceGuest> SharedExperienceGuests { get; set; }
+    public required ICollection<SharedExperienceGuest> SharedExperienceGuests { get; set; }
 }

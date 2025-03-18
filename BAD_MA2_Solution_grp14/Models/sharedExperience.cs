@@ -4,6 +4,6 @@ public class SharedExperience
     public string? Name { get; set; }
     public DateTime Date { get; set; }
 
-    public ICollection<SharedExperienceDetail> SharedExperienceDetails { get; set; }
-    public ICollection<SharedExperienceGuest> SharedExperienceGuests { get; set; }
+    public required ICollection<SharedExperienceDetail> SharedExperienceDetails { get; set; }
+    public required ICollection<SharedExperienceGuest> SharedExperienceGuests { get; set; }
 }
