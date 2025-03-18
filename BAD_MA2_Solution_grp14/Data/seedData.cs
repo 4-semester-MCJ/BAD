@@ -9,8 +9,8 @@ public static class SeedData
 
         var providers = new[]
         {
-            new Provider { Name = "Area 51 B&B", BuisnessPhysicalAddress = "51 Classified Rd, Nowhereland", PhoneNumber = "555-UFOZ", CVR = "DKALIEN666" },
-            new Provider { Name = "The Time Travelers Agency", BuisnessPhysicalAddress = "1.21 Gigawatt St, Past & Future", PhoneNumber = "555-WE-WERE", CVR = "DK88888888" }
+            new Provider { Name = "Area 51 B&B", BuisnessPhysicalAddress = "51 Classified Rd, Nowhereland", PhoneNumber = "555-UFOZ"},
+            new Provider { Name = "The Time Travelers Agency", BuisnessPhysicalAddress = "1.21 Gigawatt St, Past & Future", PhoneNumber = "555-WE-WERE" }
         };
         context.Providers.AddRange(providers);
 
@@ -27,10 +27,10 @@ public static class SeedData
 
         var experiences = new[]
         {
-            new Experience { Name = "Sleepover at Area 51", Description = "Spend a night in the desert. If you disappear, we are nowhere near", ProviderId = providers[0].ProviderId, Price = 300.00m },
-            new Experience { Name = "Time Travel Weekend", Description = "Go back to last Friday to fix your mistakes.", ProviderId = providers[1].ProviderId, Price = 5000.00m },
-            new Experience { Name = "Ghost Hunting Bootcamp", Description = "Learn to communicate with the beyond. Refunds are ghostly figures only.", ProviderId = providers[0].ProviderId, Price = 150.00m },
-            new Experience { Name = "Jetpack Racing", Description = "Strap in and take off. Legal waivers required.", ProviderId = providers[1].ProviderId, Price = 999.99m }
+            new Experience { Name = "Sleepover at Area 51", Description = "Spend a night in the desert. If you disappear, we are nowhere near", ProviderId = providers[0].ProviderId, Price = 300 },
+            new Experience { Name = "Time Travel Weekend", Description = "Go back to last Friday to fix your mistakes.", ProviderId = providers[1].ProviderId, Price = 5000 },
+            new Experience { Name = "Ghost Hunting Bootcamp", Description = "Learn to communicate with the beyond. Refunds are ghostly figures only.", ProviderId = providers[0].ProviderId, Price = 150 },
+            new Experience { Name = "Jetpack Racing", Description = "Strap in and take off. Legal waivers required.", ProviderId = providers[1].ProviderId, Price = 999 }
         };
         context.Experiences.AddRange(experiences);
         context.SaveChanges();

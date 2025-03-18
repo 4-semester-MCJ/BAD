@@ -11,9 +11,9 @@ public class NoneNegativeAttribute : ValidationAttribute
 
     public override bool IsValid(object value)
     {
-        if (value is decimal decimalValue)
+        if (value is int intValue)
         {
-            return decimalValue >= 0; // Ensure the price is not negative
+            return intValue >= 0; // Ensure the price is not negative
         }
         return false;
     }

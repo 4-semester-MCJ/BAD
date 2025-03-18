@@ -17,7 +17,7 @@ public class QueriesController : ControllerBase
     public async Task<IActionResult> GetProviderDetails()
     {
         var result = await _context.Providers
-            .Select(p => new { p.BuisnessPhysicalAddress, p.PhoneNumber, p.CVR })
+            .Select(p => new { p.BuisnessPhysicalAddress, p.PhoneNumber })
             .ToListAsync();
         return Ok(result);
     }
