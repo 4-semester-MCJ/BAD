@@ -5,10 +5,9 @@ namespace BAD_MA2_Solution_grp14.Models.DTOs
     public class GuestDTO
     {
         public int GuestId { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
+        public int Age { get; set; }
+        public string? PhoneNumber { get; set; }
     }
 
     public class CreateGuestDTO

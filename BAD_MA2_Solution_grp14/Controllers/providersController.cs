@@ -20,10 +20,12 @@ public class ProvidersController : ControllerBase
         return providers.Select(p => new ProviderDTO
         {
             ProviderId = p.ProviderId,
-            Name = p.Name
+            Name = p.Name,
+            BuisnessPhysicalAddress = p.BuisnessPhysicalAddress,
+            PhoneNumber = p.PhoneNumber,
+            TouristicOperatorPermitPdf = p.TouristicOperatorPermitPdf
         }).ToList();
     }
-
     [HttpGet("{id}")]
     public async Task<ActionResult<ProviderDTO>> GetProvider(int id)
     {
@@ -33,7 +35,10 @@ public class ProvidersController : ControllerBase
         return new ProviderDTO
         {
             ProviderId = provider.ProviderId,
-            Name = provider.Name
+            Name = provider.Name,
+            BuisnessPhysicalAddress = provider.BuisnessPhysicalAddress,
+            PhoneNumber = provider.PhoneNumber,
+            TouristicOperatorPermitPdf = provider.TouristicOperatorPermitPdf
         };
     }
 }
