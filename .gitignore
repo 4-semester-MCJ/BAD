@@ -16,8 +16,6 @@ logs/
 .env
 secrets.json
 
-# Entity Framework Migrations
-Migrations/
 
 # SQLite database
 app.db
