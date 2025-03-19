@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BAD_MA2_Solution_grp14.Models.DTOs;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -13,23 +14,42 @@ public class SharedExperiencesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<SharedExperience>>> GetSharedExperiences()
+    public async Task<ActionResult<IEnumerable<SharedExperienceDTO>>> GetSharedExperiences()
     {
-        return await _context.SharedExperiences
+        var sharedExperiences = await _context.SharedExperiences
             .Include(se => se.SharedExperienceDetails)
-            .Include(se => se.SharedExperienceGuests)
             .ToListAsync();
+            
+        return sharedExperiences.Select(se => new SharedExperienceDTO
+        {
+            SharedExperienceId = se.SharedExperienceId,
+            ExperienceId = se.SharedExperienceDetails.FirstOrDefault()?.ExperienceId ?? 0,
+            Date = se.Date
+        }).ToList();
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<SharedExperience>> GetSharedExperience(int id)
+    public async Task<ActionResult<SharedExperienceDTO>> GetSharedExperience(int id)
     {
         var se = await _context.SharedExperiences
             .Include(x => x.SharedExperienceDetails)
-            .Include(x => x.SharedExperienceGuests)
             .FirstOrDefaultAsync(x => x.SharedExperienceId == id);
 
         if (se == null) return NotFound();
-        return se;
+        
+        return new SharedExperienceDTO
+        {
+            SharedExperienceId = se.SharedExperienceId,
+            ExperienceId = se.SharedExperienceDetails.FirstOrDefault()?.ExperienceId ?? 0,
+            Date = se.Date
+        };
     }
+
+    
+
+
+
+
+
+    
 }
