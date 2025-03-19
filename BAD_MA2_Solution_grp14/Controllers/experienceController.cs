@@ -101,22 +101,25 @@ public class ExperiencesController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/experiences/{id}
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteExperience(int id)
+// DELETE: api/experiences/{id}
+[HttpDelete("{id}")]
+public async Task<IActionResult> DeleteExperience(int id)
+{
+    var experience = await _context.Experiences.FindAsync(id);
+    if (experience == null)
     {
-        // Find the experience by ID
-        var experience = await _context.Experiences.FindAsync(id);
-        if (experience == null)
-        {
-            return NotFound(); // Return 404 if not found
-        }
-
-        // Remove the experience from the database
-        _context.Experiences.Remove(experience);
-        await _context.SaveChangesAsync();
-
-        // Return 204 No Content as confirmation of successful deletion
-        return NoContent();
+        return NotFound();
     }
+
+    _context.Experiences.Remove(experience);
+    await _context.SaveChangesAsync();
+
+    // Find den højeste eksisterende ID-værdi
+    var maxId = await _context.Experiences.MaxAsync(e => (int?)e.ExperienceId) ?? 0;
+
+    // Reseed ID til max eksisterende værdi
+    await _context.Database.ExecuteSqlRawAsync($"DBCC CHECKIDENT ('Experiences', RESEED, {maxId})");
+
+    return NoContent();
+}
 }
