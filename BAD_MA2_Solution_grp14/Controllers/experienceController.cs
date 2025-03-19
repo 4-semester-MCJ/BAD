@@ -114,10 +114,10 @@ public async Task<IActionResult> DeleteExperience(int id)
     _context.Experiences.Remove(experience);
     await _context.SaveChangesAsync();
 
-    // Find den højeste eksisterende ID-værdi
+    // Find max ID in table
     var maxId = await _context.Experiences.MaxAsync(e => (int?)e.ExperienceId) ?? 0;
 
-    // Reseed ID til max eksisterende værdi
+    // Reseed ID to Max ID
     await _context.Database.ExecuteSqlRawAsync($"DBCC CHECKIDENT ('Experiences', RESEED, {maxId})");
 
     return NoContent();
