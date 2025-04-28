@@ -18,6 +18,18 @@ services:
       retries: 10
       start_period: 10s
 
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodbdata:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
   api:
     build:
       context: .
@@ -31,6 +43,9 @@ services:
     depends_on:
       sqlserver:
         condition: service_healthy
+      mongodb:
+        condition: service_healthy
 
 volumes:
   sqldata:
+  mongodbdata:
