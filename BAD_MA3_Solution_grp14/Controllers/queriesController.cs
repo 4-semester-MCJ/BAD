@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BAD_MA3_Solution_grp14.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -13,8 +14,9 @@ public class QueriesController : ControllerBase
         _context = context;
     }
 
-    // 1. Get provider data - already correctly showing only BusinessPhysicalAddress, PhoneNumber, and TouristicOperatorPermitPdf
+    // 1. Get provider data - only available to Managers and Admins
     [HttpGet("providers-info")]
+    [Authorize(Roles = "Manager,Admin")]
     public async Task<ActionResult<IEnumerable<ProviderInfoDTO>>> GetProviderDetails()
     {
         var result = await _context.Providers
@@ -28,8 +30,9 @@ public class QueriesController : ControllerBase
         return Ok(result);
     }
 
-    // 2. List experiences with price - should only show Name and Price
+    // 2. List experiences with price - available to anonymous users
     [HttpGet("experiences-list")]
+    [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<ExperienceListDTO>>> GetExperiencesList()
     {
         var result = await _context.Experiences
@@ -42,8 +45,9 @@ public class QueriesController : ControllerBase
         return Ok(result);
     }
 
-    // 3. List shared experiences ordered by date - should only show Name and Date
+    // 3. List shared experiences ordered by date - available to anonymous users
     [HttpGet("shared-experiences")]
+    [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<SharedExperienceListDTO>>> GetSharedExperiences()
     {
         var result = await _context.SharedExperiences
@@ -57,8 +61,9 @@ public class QueriesController : ControllerBase
         return Ok(result);
     }
 
-    // 4. Guests for shared experiences - should only show SharedExperienceId and GuestName
+    // 4. Guests for shared experiences - only available to Managers and Admins
     [HttpGet("shared-experiences/guests")]
+    [Authorize(Roles = "Manager,Admin")]
     public async Task<ActionResult<IEnumerable<SharedExperienceGuestListDTO>>> GetGuestsForSharedExperiences()
     {
         var result = await _context.SharedExperienceGuests
@@ -73,8 +78,9 @@ public class QueriesController : ControllerBase
         return Ok(result);
     }
 
-    // 5. Experiences in a specific shared experience
+    // 5. Experiences in a specific shared experience - available to anonymous users
     [HttpGet("shared-experiences/{name}/experiences")]
+    [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<SharedExperienceExperiencesDTO>>> GetExperiencesInSharedExperience(string name)
     {
         var result = await _context.SharedExperienceDetails
@@ -89,8 +95,9 @@ public class QueriesController : ControllerBase
         return Ok(result);
     }
 
-    // 6. Guests registered in a specific shared experience
+    // 6. Guests registered in a specific shared experience - only available to Managers and Admins
     [HttpGet("shared-experiences/{name}/guests")]
+    [Authorize(Roles = "Manager,Admin")]
     public async Task<ActionResult<IEnumerable<SharedExperienceGuestsDTO>>> GetGuestsInSharedExperience(string name)
     {
         var result = await _context.SharedExperienceGuests
@@ -105,8 +112,9 @@ public class QueriesController : ControllerBase
         return Ok(result);
     }
 
-    // 7. Min, avg, max price
+    // 7. Min, avg, max price - only available to Managers and Admins
     [HttpGet("experiences/price-stats")]
+    [Authorize(Roles = "Manager,Admin")]
     public async Task<ActionResult<PriceStatsDTO>> GetPriceStats()
     {
         var result = new PriceStatsDTO
@@ -118,8 +126,9 @@ public class QueriesController : ControllerBase
         return Ok(result);
     }
 
-    // 8. Guest count and sales per experience
+    // 8. Guest count and sales per experience - only available to Managers and Admins
     [HttpGet("experiences/guests-sales")]
+    [Authorize(Roles = "Manager,Admin")]
     public async Task<ActionResult<IEnumerable<ExperienceStatsDTO>>> GetGuestsAndSalesPerExperience()
     {
         var result = await _context.Experiences
@@ -141,8 +150,9 @@ public class QueriesController : ControllerBase
         return Ok(result);
     }
 
-    // 9. Shared experiences with more than one guest
+    // 9. Shared experiences with more than one guest - only available to Managers and Admins
     [HttpGet("shared-experiences/multiple-guests")]
+    [Authorize(Roles = "Manager,Admin")]
     public async Task<ActionResult<IEnumerable<SharedExperienceGuestCountDTO>>> GetSharedExperiencesWithManyGuests()
     {
         var result = await _context.SharedExperiences
