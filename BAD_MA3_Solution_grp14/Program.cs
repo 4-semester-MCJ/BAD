@@ -1,6 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Serilog BEFORE anything else
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .WriteTo.Console() // Optional: log to console too
+    .CreateLogger();
+
+// Replace default logger with Serilog
+builder.Host.UseSerilog();
 
 // Add services to the container
 builder.Services.AddControllers();
@@ -26,9 +37,11 @@ app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BadBoysAPI v1"));
 
 app.UseHttpsRedirection();
+app.UseMiddleware<HttpRequestLoggingMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
 
 
 
