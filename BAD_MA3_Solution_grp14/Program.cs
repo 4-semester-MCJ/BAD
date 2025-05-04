@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,18 +79,48 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Add MongoDB as a service
+builder.Services.AddSingleton<IMongoClient>(sp =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("MongoDb");
+    return new MongoClient(connectionString);
+});
+
+builder.Services.AddScoped(sp =>
+{
+    var client = sp.GetRequiredService<IMongoClient>();
+    return client.GetDatabase("BadBoysDb");
+});
+
 var app = builder.Build();
 
 // Seed data on startup
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<AppDbContext>();
+
     dbContext.Database.EnsureCreated();
-    // Seed users and roles
-    await SeedData.Initialize(scope.ServiceProvider);
-    // Seed domain data
-    SeedData.Initialize(dbContext);
+
+    try
+    {
+        // Vent synkront på async metode
+        SeedDatabaseAsync(services).GetAwaiter().GetResult();
+
+        // Hvis du har en synkron metode, behold den
+        SeedData.Initialize(dbContext);
+    }
+    catch (Exception ex)
+    {
+        Log.Error(ex, "An error occurred while seeding the database.");
+    }
 }
+
+static async Task SeedDatabaseAsync(IServiceProvider services)
+{
+    await SeedData.Initialize(services); // den async metode du havde
+}
+
 
 // Configure the HTTP request pipeline
 app.UseSwagger();
@@ -101,47 +132,3 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
-
-
-
-
-
-
-
-
-
-// using Microsoft.EntityFrameworkCore;
-
-// var builder = WebApplication.CreateBuilder(args);
-
-// // Add services to the container
-// builder.Services.AddControllers();
-// builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new() { Title = "BadBoysAPI", Version = "v1" }));
-
-// // Register DbContext with connection string
-// builder.Services.AddDbContext<AppDbContext>(options =>
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// var app = builder.Build();
-
-// // Seed data on startup
-// using (var scope = app.Services.CreateScope())
-// {
-//     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-//     dbContext.Database.EnsureCreated();
-//     SeedData.Initialize(dbContext);
-// }
-
-// // Configure the HTTP request pipeline
-
-// app.UseSwagger();
-// app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BadBoysAPI v1"));
-
-// app.UseHttpsRedirection();
-
-// app.UseAuthorization();
-
-// app.MapControllers();
-
-// app.Run();
