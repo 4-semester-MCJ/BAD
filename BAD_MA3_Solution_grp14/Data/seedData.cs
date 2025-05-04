@@ -1,8 +1,70 @@
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 public static class SeedData
 {
+    public static async Task Initialize(IServiceProvider serviceProvider)
+    {
+        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+        // Create roles
+        string[] roleNames = { "Admin", "Manager", "Provider", "Guest" };
+        foreach (var roleName in roleNames)
+        {
+            if (!await roleManager.RoleExistsAsync(roleName))
+            {
+                await roleManager.CreateAsync(new IdentityRole(roleName));
+            }
+        }
+
+        // Create admin user
+        var adminEmail = "admin@badboys.com";
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+        if (adminUser == null)
+        {
+            adminUser = new ApplicationUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                EmailConfirmed = true
+            };
+            var result = await userManager.CreateAsync(adminUser, "Admin123!");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+            }
+        }
+
+        // Create test users for other roles
+        var testUsers = new[]
+        {
+            new { Email = "manager@badboys.com", Password = "Manager123!", Role = "Manager" },
+            new { Email = "provider@badboys.com", Password = "Provider123!", Role = "Provider" },
+            new { Email = "guest@badboys.com", Password = "Guest123!", Role = "Guest" }
+        };
+
+        foreach (var testUser in testUsers)
+        {
+            var user = await userManager.FindByEmailAsync(testUser.Email);
+            if (user == null)
+            {
+                user = new ApplicationUser
+                {
+                    UserName = testUser.Email,
+                    Email = testUser.Email,
+                    EmailConfirmed = true
+                };
+                var result = await userManager.CreateAsync(user, testUser.Password);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, testUser.Role);
+                }
+            }
+        }
+    }
+
     public static void Initialize(AppDbContext context)
     {
         if (context.Providers.Any()) return; // DB already seeded
