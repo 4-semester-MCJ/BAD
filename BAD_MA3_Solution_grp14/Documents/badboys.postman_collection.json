@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "1f4bff8f-ac53-40e1-bcc2-a6813781c4cb",
+		"name": "localhost:8080",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "43168159"
+	},
+	"item": [
+		{
+			"name": "/api/queries/providers-info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AYmFkYm95cy5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBiYWRib3lzLmNvbSIsImp0aSI6IjBiMWMzODU3LWJiMmUtNGQ4Ny1hNDZmLTIxYTdkNzFiOTBhMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ2NDQ2OTk2LCJpc3MiOiJCYWRCb3lzQVBJIiwiYXVkIjoiQmFkQm95c0FQSSJ9.XUaX3cWJ967cVi-ugzVGOe2X2Al4FJ9xiPbUsm0nk_A"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNaWNoYWVsIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImp0aSI6IjQ4NjQxOGIyLWY2MWMtNDI4OS05ZGJiLTY5YjlmMTZlZDlmNiIsImV4cCI6MTc0Mzg2MTA5OSwiaXNzIjoieW91ci1pc3N1ZXIiLCJhdWQiOiJ5b3VyLWF1ZGllbmNlIn0.UvVgUSpYTMoWnp_dM6NViw0eI3nP7shj3izZQAddW1Y",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/queries/providers-info",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "queries", "providers-info"],
+					"query": [
+						{
+							"key": "Au",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/queries/experiences-list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AYmFkYm95cy5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBiYWRib3lzLmNvbSIsImp0aSI6IjBiMWMzODU3LWJiMmUtNGQ4Ny1hNDZmLTIxYTdkNzFiOTBhMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ2NDQ2OTk2LCJpc3MiOiJCYWRCb3lzQVBJIiwiYXVkIjoiQmFkQm95c0FQSSJ9.XUaX3cWJ967cVi-ugzVGOe2X2Al4FJ9xiPbUsm0nk_A"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNaWNoYWVsIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImp0aSI6IjQ4NjQxOGIyLWY2MWMtNDI4OS05ZGJiLTY5YjlmMTZlZDlmNiIsImV4cCI6MTc0Mzg2MTA5OSwiaXNzIjoieW91ci1pc3N1ZXIiLCJhdWQiOiJ5b3VyLWF1ZGllbmNlIn0.UvVgUSpYTMoWnp_dM6NViw0eI3nP7shj3izZQAddW1Y",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/queries/experiences-list",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "queries", "experiences-list"],
+					"query": [
+						{
+							"key": "Au",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/queries/shared-experiences",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AYmFkYm95cy5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBiYWRib3lzLmNvbSIsImp0aSI6IjBiMWMzODU3LWJiMmUtNGQ4Ny1hNDZmLTIxYTdkNzFiOTBhMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ2NDQ2OTk2LCJpc3MiOiJCYWRCb3lzQVBJIiwiYXVkIjoiQmFkQm95c0FQSSJ9.XUaX3cWJ967cVi-ugzVGOe2X2Al4FJ9xiPbUsm0nk_A"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNaWNoYWVsIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImp0aSI6IjQ4NjQxOGIyLWY2MWMtNDI4OS05ZGJiLTY5YjlmMTZlZDlmNiIsImV4cCI6MTc0Mzg2MTA5OSwiaXNzIjoieW91ci1pc3N1ZXIiLCJhdWQiOiJ5b3VyLWF1ZGllbmNlIn0.UvVgUSpYTMoWnp_dM6NViw0eI3nP7shj3izZQAddW1Y",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/queries/shared-experiences",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "queries", "shared-experiences"],
+					"query": [
+						{
+							"key": "Au",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/Queries/shared-experiences/guests",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AYmFkYm95cy5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBiYWRib3lzLmNvbSIsImp0aSI6IjBiMWMzODU3LWJiMmUtNGQ4Ny1hNDZmLTIxYTdkNzFiOTBhMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ2NDQ2OTk2LCJpc3MiOiJCYWRCb3lzQVBJIiwiYXVkIjoiQmFkQm95c0FQSSJ9.XUaX3cWJ967cVi-ugzVGOe2X2Al4FJ9xiPbUsm0nk_A"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/Queries/shared-experiences/guests"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/queries/shared-experiences/Parallel Universe Trip/experiences",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AYmFkYm95cy5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBiYWRib3lzLmNvbSIsImp0aSI6IjBiMWMzODU3LWJiMmUtNGQ4Ny1hNDZmLTIxYTdkNzFiOTBhMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ2NDQ2OTk2LCJpc3MiOiJCYWRCb3lzQVBJIiwiYXVkIjoiQmFkQm95c0FQSSJ9.XUaX3cWJ967cVi-ugzVGOe2X2Al4FJ9xiPbUsm0nk_A"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/queries/shared-experiences/Parallel Universe Trip/guests"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/queries/shared-experiences/Parallel Universe Trip/guests",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AYmFkYm95cy5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBiYWRib3lzLmNvbSIsImp0aSI6IjBiMWMzODU3LWJiMmUtNGQ4Ny1hNDZmLTIxYTdkNzFiOTBhMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ2NDQ2OTk2LCJpc3MiOiJCYWRCb3lzQVBJIiwiYXVkIjoiQmFkQm95c0FQSSJ9.XUaX3cWJ967cVi-ugzVGOe2X2Al4FJ9xiPbUsm0nk_A"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/queries/shared-experiences/Parallel Universe Trip/guests"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/queries/experiences/price-stats",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AYmFkYm95cy5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBiYWRib3lzLmNvbSIsImp0aSI6IjBiMWMzODU3LWJiMmUtNGQ4Ny1hNDZmLTIxYTdkNzFiOTBhMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ2NDQ2OTk2LCJpc3MiOiJCYWRCb3lzQVBJIiwiYXVkIjoiQmFkQm95c0FQSSJ9.XUaX3cWJ967cVi-ugzVGOe2X2Al4FJ9xiPbUsm0nk_A"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/queries/experiences/price-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/Queries/experiences/guests-sales",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AYmFkYm95cy5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBiYWRib3lzLmNvbSIsImp0aSI6IjcwNzMxNDNjLWExMWYtNGMxMy1hZjMwLWMzMGM4NTMxZTJhMyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ2NDY4NDAyLCJpc3MiOiJCYWRCb3lzQVBJIiwiYXVkIjoiQmFkQm95c0FQSSJ9.h0ZTW0shgwZQuws_LXN2EBJz8J2PnuCdR43TsfysG3M"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/Queries/experiences/guests-sales"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/Queries/shared-experiences/multiple-guests",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AYmFkYm95cy5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBiYWRib3lzLmNvbSIsImp0aSI6IjBiMWMzODU3LWJiMmUtNGQ4Ny1hNDZmLTIxYTdkNzFiOTBhMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ2NDQ2OTk2LCJpc3MiOiJCYWRCb3lzQVBJIiwiYXVkIjoiQmFkQm95c0FQSSJ9.XUaX3cWJ967cVi-ugzVGOe2X2Al4FJ9xiPbUsm0nk_A"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/Queries/shared-experiences/multiple-guests"
+			},
+			"response": []
+		}
+	]
+}
