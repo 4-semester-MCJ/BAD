@@ -4,6 +4,7 @@ using BAD_MA3_Solution_grp14.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
+namespace BAD_MA3_Solution_grp14.Services;
 
 
 [Route("api/[controller]")]
@@ -11,10 +12,12 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 public class QueriesController : ControllerBase
 {
     private readonly AppDbContext _context;
+    private readonly ILogService _logService;
 
-    public QueriesController(AppDbContext context)
+    public QueriesController(AppDbContext context, ILogService logService)
     {
         _context = context;
+        _logService = logService;
     }
 
     // 1. Get provider data - only available to Managers and Admins
@@ -169,59 +172,13 @@ public class QueriesController : ControllerBase
         return Ok(result);
     }
 
+
+    // Get all LogEntries 
     [Authorize(Roles = "Admin")]
     [HttpGet("logentries")]
     public async Task<ActionResult<IEnumerable<LogEntryDTO>>> GetLogEntries([FromQuery] LogEntrySearchDTO searchParams)
     {
-        var query = _context.LogEntries.AsQueryable();
-
-        // Apply search filters
-        if (!string.IsNullOrEmpty(searchParams.Action))
-        {
-            query = query.Where(l => l.Action.Contains(searchParams.Action));
-        }
-
-        if (!string.IsNullOrEmpty(searchParams.EntityType))
-        {
-            query = query.Where(l => l.EntityType.Contains(searchParams.EntityType));
-        }
-
-        if (!string.IsNullOrEmpty(searchParams.EntityId))
-        {
-            query = query.Where(l => l.EntityId.Contains(searchParams.EntityId));
-        }
-
-        if (!string.IsNullOrEmpty(searchParams.UserId))
-        {
-            query = query.Where(l => l.UserId.Contains(searchParams.UserId));
-        }
-
-        if (searchParams.StartDate.HasValue)
-        {
-            query = query.Where(l => l.Timestamp >= searchParams.StartDate.Value);
-        }
-
-        if (searchParams.EndDate.HasValue)
-        {
-            query = query.Where(l => l.Timestamp <= searchParams.EndDate.Value);
-        }
-
-        // Order by timestamp descending (most recent first)
-        query = query.OrderByDescending(l => l.Timestamp);
-
-        var result = await query
-            .Select(l => new LogEntryDTO
-            {
-                LogEntryId = l.LogEntryId,
-                Action = l.Action,
-                EntityType = l.EntityType,
-                EntityId = l.EntityId,
-                UserId = l.UserId,
-                Timestamp = l.Timestamp,
-                Details = l.Details
-            })
-            .ToListAsync();
-
+        var result = await _logService.SearchLogsAsync(searchParams);
         return Ok(result);
     }
 }

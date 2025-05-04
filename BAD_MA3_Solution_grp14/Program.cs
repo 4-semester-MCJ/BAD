@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
+using BAD_MA3_Solution_grp14.Services;
+using BAD_MA3_Solution_grp14.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,6 +81,16 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Add MongoDB service
+builder.Services.AddSingleton<ILogService, MongoLogService>();
+
+// Add MongoDB connection string
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+// Add MongoDB driver
+builder.Services.AddSingleton<IMongoClient>(sp =>
+    new MongoClient(builder.Configuration.GetConnectionString("MongoDB")));
+
 var app = builder.Build();
 
 // Seed data on startup
@@ -96,7 +109,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BadBoysAPI v1"));
 
 app.UseHttpsRedirection();
-app.UseMiddleware<HttpRequestLoggingMiddleware>();
+app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
