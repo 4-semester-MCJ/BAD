@@ -134,24 +134,29 @@ public class QueriesController : ControllerBase
     [Authorize(Roles = "Manager,Admin")]
     public async Task<ActionResult<IEnumerable<ExperienceStatsDTO>>> GetGuestsAndSalesPerExperience()
     {
-        var result = await _context.Experiences
-            .Select(e => new ExperienceStatsDTO
+        var experiences = await _context.Experiences
+            .Include(e => e.SharedExperienceDetails)
+                .ThenInclude(d => d.SharedExperience)
+                    .ThenInclude(se => se.SharedExperienceGuests)
+            .ToListAsync(); // Fetches data first
+
+        var result = experiences.Select(e =>
+        {
+            var guests = e.SharedExperienceDetails?
+                .SelectMany(d => d.SharedExperience?.SharedExperienceGuests ?? new List<SharedExperienceGuest>())
+                .ToList() ?? new List<SharedExperienceGuest>();
+
+            return new ExperienceStatsDTO
             {
                 Name = e.Name,
-                GuestCount = e.SharedExperienceDetails != null
-                    ? e.SharedExperienceDetails
-                        .SelectMany(d => d.SharedExperience.SharedExperienceGuests ?? Enumerable.Empty<SharedExperienceGuest>())
-                        .Count()
-                    : 0,
-                TotalSales = e.Price * (e.SharedExperienceDetails != null
-                    ? e.SharedExperienceDetails
-                        .SelectMany(d => d.SharedExperience.SharedExperienceGuests ?? Enumerable.Empty<SharedExperienceGuest>())
-                        .Count()
-                    : 0)
-            })
-            .ToListAsync();
+                GuestCount = guests.Count,
+                TotalSales = e.Price * guests.Count
+            };
+        }).ToList();
+
         return Ok(result);
     }
+
 
     // 9. Shared experiences with more than one guest - only available to Managers and Admins
     [HttpGet("shared-experiences/multiple-guests")]
