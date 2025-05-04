@@ -17,6 +17,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<SharedExperience> SharedExperiences { get; set; }
     public DbSet<SharedExperienceDetail> SharedExperienceDetails { get; set; }
     public DbSet<SharedExperienceGuest> SharedExperienceGuests { get; set; }
+    public DbSet<LogEntry> LogEntries { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
