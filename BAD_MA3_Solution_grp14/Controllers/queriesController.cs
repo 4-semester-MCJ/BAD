@@ -157,7 +157,7 @@ public class QueriesController : ControllerBase
 
     // 9. Shared experiences with more than one guest - only available to Managers and Admins
     [HttpGet("shared-experiences/multiple-guests")]
-    [Authorize(Roles = "Manager,Admin")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<IEnumerable<SharedExperienceGuestCountDTO>>> GetSharedExperiencesWithManyGuests()
     {
         var result = await _context.SharedExperiences
