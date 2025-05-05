@@ -50,7 +50,18 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"businessPhysicalAddress": "51 Classified Rd, Nowhereland",
+					"phoneNumber": "555-UFOZ",
+					"touristicOperatorPermitPdf": "PDF1"
+				},
+				{
+					"businessPhysicalAddress": "1.21 Gigawatt St, Past & Future",
+					"phoneNumber": "555-WE-WERE",
+					"touristicOperatorPermitPdf": "PDF2"
+				}
+			]
 		},
 		{
 			"name": "/api/queries/experiences-list",
@@ -96,7 +107,24 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Sleepover at Area 51",
+					"price": 300
+				},
+				{
+					"name": "Time Travel Weekend",
+					"price": 5000
+				},
+				{
+					"name": "Ghost Hunting Bootcamp",
+					"price": 150
+				},
+				{
+					"name": "Jetpack Racing",
+					"price": 999
+				}
+			]
 		},
 		{
 			"name": "/api/queries/shared-experiences",
@@ -142,7 +170,16 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Parallel Universe Trip",
+					"date": "2025-03-01T00:00:00"
+				},
+				{
+					"name": "Flat Earth Cruise",
+					"date": "2025-04-10T00:00:00"
+				}
+			]
 		},
 		{
 			"name": "/api/Queries/shared-experiences/guests",
@@ -157,7 +194,24 @@
 				"header": [],
 				"url": "http://localhost:8080/api/Queries/shared-experiences/guests"
 			},
-			"response": []
+			"response": [
+				{
+					"sharedExperienceId": 1,
+					"guestName": "Florida Man"
+				},
+				{
+					"sharedExperienceId": 1,
+					"guestName": "Elon Dust"
+				},
+				{
+					"sharedExperienceId": 2,
+					"guestName": "Captain Obvious"
+				},
+				{
+					"sharedExperienceId": 2,
+					"guestName": "The Loch Ness Monster"
+				}
+			]
 		},
 		{
 			"name": "/api/queries/shared-experiences/Parallel Universe Trip/experiences",
@@ -172,7 +226,14 @@
 				"header": [],
 				"url": "http://localhost:8080/api/queries/shared-experiences/Parallel Universe Trip/guests"
 			},
-			"response": []
+			"response": [
+				{
+					"experienceName": "Sleepover at Area 51"
+				},
+				{
+					"experienceName": "Time Travel Weekend"
+				}
+			]
 		},
 		{
 			"name": "/api/queries/shared-experiences/Parallel Universe Trip/guests",
@@ -187,7 +248,14 @@
 				"header": [],
 				"url": "http://localhost:8080/api/queries/shared-experiences/Parallel Universe Trip/guests"
 			},
-			"response": []
+			"response": [
+				{
+					"guestName": "Florida Man"
+				},
+				{
+					"guestName": "Elon Dust"
+				}
+			]
 		},
 		{
 			"name": "/api/queries/experiences/price-stats",
@@ -202,7 +270,11 @@
 				"header": [],
 				"url": "http://localhost:8080/api/queries/experiences/price-stats"
 			},
-			"response": []
+			"response": {
+				"minPrice": 150,
+				"avgPrice": 1612.25,
+				"maxPrice": 5000
+			}
 		},
 		{
 			"name": "http://localhost:8080/api/Queries/experiences/guests-sales",
@@ -217,7 +289,28 @@
 				"header": [],
 				"url": "http://localhost:8080/api/Queries/experiences/guests-sales"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Sleepover at Area 51",
+					"guestCount": 2,
+					"totalSales": 600
+				},
+				{
+					"name": "Time Travel Weekend",
+					"guestCount": 2,
+					"totalSales": 10000
+				},
+				{
+					"name": "Ghost Hunting Bootcamp",
+					"guestCount": 2,
+					"totalSales": 300
+				},
+				{
+					"name": "Jetpack Racing",
+					"guestCount": 2,
+					"totalSales": 1998
+				}
+			]
 		},
 		{
 			"name": "/api/Queries/shared-experiences/multiple-guests",
@@ -232,7 +325,16 @@
 				"header": [],
 				"url": "http://localhost:8080/api/Queries/shared-experiences/multiple-guests"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Parallel Universe Trip",
+					"guestCount": 2
+				},
+				{
+					"name": "Flat Earth Cruise",
+					"guestCount": 2
+				}
+			]
 		}
 	]
 }
